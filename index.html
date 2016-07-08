@@ -30,7 +30,26 @@
         <h3>
 <a id="super-addicting-hours-of-fun" class="anchor" href="#super-addicting-hours-of-fun" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Super addicting, hours of fun.</h3>
 
-<p>I created this program in 2012 as part of a project to learn how to create multi-threaded applications.</p>
+<p>I created this program in 2012 as part of a project to learn how to create multi-threaded applications.  </p>
+
+<h3>
+<a id="how-it-works" class="anchor" href="#how-it-works" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How it works</h3>
+
+<p>Hrace generates the numbers of threads specified in the argument, plus one.  The +1 thread manages the horse race and tracks who is in the lead.  All the other threads represent a horse, and they are responsible for drawing an <em>"H"</em> on the screen.</p>
+
+<p>The main thread draws the barrier of the race track.  It then forks out a process for each horse.  </p>
+
+<p>Each horse executes a rand() to decide how long it will wait until it tries to execute.  When a horse gets processor time, it opens a semaphore to prevent other threads from walking on it.  The horse executes, clearing all characters from the left side of the cursor on it's line to erase it's old position, then draws a new <em>H</em> one position further left.  It then "posts" the semaphore, freeing up the scheduler to execute another horse.  A check is performed to see if that advancement put the horse over the finish line.</p>
+
+<p>The parent thread periodically checks to see who is in the lead and announces it on the screen.</p>
+
+<p>The speed of a horse is determined by how low it's <code>i_rand</code> dice roll is every turn.  The lower it's roll, the sooner it will schedule itself to move forward another space.</p>
+
+<p>When a horse thread detects that a movement has put it over the finish line, the horse writes it's line number to shared memory.  The parent thread checks periodically to see if there is a winner, and if so, announces it on the screen.</p>
+
+<p>As each horse crosses the finish line, it deletes it's semaphore, unmaps itself from the shared memory, and terminates.</p>
+
+<p>When all horses have terminated, the parent cleans up the shared memory and it's semaphore, then exits.</p>
 
 <h3>
 <a id="how-to-use-it" class="anchor" href="#how-to-use-it" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to use it</h3>
@@ -55,9 +74,6 @@ cd hrace
 </code></pre>
 
 <p>You can specify any (almost any) number of horses you would like to race.  Depending on your terminal size, weird things may happen if you go above 32-48.</p>
-
-<h3>
-<a id="how-it-works" class="anchor" href="#how-it-works" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How it works</h3>
 
 <h3>
 <a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Support or Contact</h3>
