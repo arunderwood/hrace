@@ -1,0 +1,6 @@
+{
+  "name": "Hrace",
+  "tagline": "A multi threaded C application that races horses across the screen.",
+  "body": "### Super addicting, hours of fun.\r\nI created this program in 2012 as part of a project to learn how to create multi-threaded applications.\r\n\r\n### How to use it\r\n####Get the code\r\n````\r\ngit clone https://github.com/arunderwood/hrace.git\r\ncd hrace\r\n````\r\n####Build the code\r\n````\r\nmake\r\n````\r\n####Run the code\r\n````\r\n./hrace 30\r\n````\r\n\r\nYou can specify any (almost any) number of horses you would like to race.  Depending on your terminal size, weird things may happen if you go above 32-48.\r\n\r\n### How it works\r\n\r\n### Support or Contact\r\nHaving trouble? Send me a message.\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
